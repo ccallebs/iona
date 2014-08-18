@@ -20,6 +20,24 @@ function Player.create()
   return player
 end
 
+function Player:update(dt)
+  if love.keyboard.isDown("right") then
+    self:moveRight()
+  end
+
+  if love.keyboard.isDown("left") then
+    self:moveLeft()
+  end
+
+  if love.keyboard.isDown("up") then
+    self:moveUp()
+  end
+
+  if love.keyboard.isDown("down") then
+    self:moveDown()
+  end
+end
+
 function Player:draw()
   love.graphics.rectangle("fill", self.x, self.y, self.player_length, self.player_length)
 end
