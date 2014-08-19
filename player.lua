@@ -14,9 +14,6 @@ function Player.create()
   player.window_width = love.graphics.getWidth()
   player.window_height = love.graphics.getHeight()
 
-  -- Setting self color
-  love.graphics.setColor(5, 255, 85)
-
   return player
 end
 
@@ -39,6 +36,9 @@ function Player:update(dt)
 end
 
 function Player:draw()
+  -- Setting player color
+  love.graphics.setColor(5, 255, 85)
+
   love.graphics.rectangle("fill", self.x, self.y, self.player_length, self.player_length)
 end
 

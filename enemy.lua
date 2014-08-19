@@ -14,9 +14,6 @@ function Enemy.create()
   enemy.x = math.random(enemy.window_width)
   enemy.y = math.random(enemy.window_height)
 
-  -- Setting enemy color
-  love.graphics.setColor(255, 5, 85)
-
   return enemy
 end
 
@@ -34,5 +31,8 @@ function Enemy:update(player)
 end
   
 function Enemy:draw()
+  -- Setting enemy color
+  love.graphics.setColor(255, 5, 85)
+
   love.graphics.rectangle("fill", self.x, self.y, self.enemy_length, self.enemy_length)
 end
