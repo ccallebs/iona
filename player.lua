@@ -9,7 +9,7 @@ function Player.create()
 
   player.x = 0
   player.y = 0
-  player.movement_length = 2
+  player.movement_length = 6
   player.player_length = 50
   player.window_width = love.graphics.getWidth()
   player.window_height = love.graphics.getHeight()
