@@ -7,7 +7,7 @@ function Enemy.create()
 
   setmetatable(enemy, Enemy)
 
-  enemy.movement_length = math.random(1)
+  enemy.movement_length = math.random(3)
   enemy.enemy_length = 25
   enemy.window_width = love.graphics.getWidth()
   enemy.window_height = love.graphics.getHeight()

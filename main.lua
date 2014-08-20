@@ -7,7 +7,7 @@ local player = Player.create()
 local enemies = (function()
   enemies = {}
 
-  for i=1, 2, 1 do
+  for i=1, 8, 1 do
     enemies[i] = Enemy.create()
   end
 
