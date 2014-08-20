@@ -39,6 +39,10 @@ function love.update(dt)
 
     -- Test enemy collision
     if Collision.create(player, enemy):collide() then
+      print("Player x: " .. tostring(player.x))
+      print("Player y: " .. tostring(player.y))
+      print("Enemy x: " .. tostring(enemy.x))
+      print("Enemy y: " .. tostring(enemy.y))
       collision_count = collision_count + 1
     end
   end
