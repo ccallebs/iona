@@ -63,7 +63,7 @@ function love.update(dt)
 
   removeDeadEnemies()
 
-  if #enemies == 0 then
+  if #enemies == 0 and game_state ~= 'game_over' then
     game_state = 'win' 
   end
 end
