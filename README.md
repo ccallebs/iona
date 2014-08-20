@@ -1,3 +1,5 @@
-love2d-sandbox
-==============
-My little area to experiment with the love2d Lua framework.
+# Iona
+
+A simple game based around not getting hit.
+
+__Requires love2d framework__
