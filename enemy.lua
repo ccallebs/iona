@@ -39,5 +39,5 @@ function Enemy:draw()
 end
 
 function Enemy:collision()
-  print("Enemy has collided with player!")
+  return nil 
 end

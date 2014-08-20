@@ -76,5 +76,5 @@ function Player:withinBounds(type)
 end
 
 function Player:collision()
-  print("Player 1 has collided with an enemy!")
+  return nil
 end
