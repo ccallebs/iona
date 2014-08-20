@@ -13,7 +13,7 @@ function Player.create()
   player.player_length = 50
   player.window_width = love.graphics.getWidth()
   player.window_height = love.graphics.getHeight()
-  player.collision_radius = 2
+  player.collision_radius = 8
 
   return player
 end

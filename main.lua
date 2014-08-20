@@ -23,10 +23,12 @@ function love.draw()
     enemy:draw()
   end
 
+  love.graphics.setColor(255, 255, 0)
   love.graphics.print("Collision count: " .. collision_count, 10, 10)
 end
 
 function love.load()
+  love.graphics.setNewFont(28)
 end
 
 function love.update(dt)

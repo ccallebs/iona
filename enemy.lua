@@ -13,7 +13,7 @@ function Enemy.create()
   enemy.window_height = love.graphics.getHeight()
   enemy.x = math.random(enemy.window_width)
   enemy.y = math.random(enemy.window_height)
-  enemy.collision_radius = 2
+  enemy.collision_radius = 8
 
   return enemy
 end
