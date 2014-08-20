@@ -1,35 +1,24 @@
+require 'game'
 require 'player'
 require 'enemy'
 require 'collision'
 
-local player = Player.create()
-
-local enemies = (function()
-  enemies = {}
-
-  for i=1, 8, 1 do
-    enemies[i] = Enemy.create()
-  end
-
-  return enemies
-end)()
-
-local game_state = 'playing'
+local game = Game.create()
 
 function love.draw()
   -- Used for displaying status messages
   local middle_x = love.graphics.getWidth() / 2
   local middle_y = love.graphics.getHeight() / 2
 
-  if game_state == 'playing' then
-    player:draw()
+  if game.state == 'playing' then
+    game.player:draw()
 
-    for i, enemy in ipairs(enemies) do
+    for i, enemy in ipairs(game.enemies) do
       enemy:draw()
     end
 
     love.graphics.setColor(255, 255, 0)
-  elseif game_state == 'win' then
+  elseif game.state == 'win' then
     love.graphics.setColor(0, 255, 0)
     love.graphics.printf("YOU WIN!", 0, middle_y, 800, 'center')
   else
@@ -40,45 +29,33 @@ end
 
 function love.load()
   love.graphics.setNewFont(28)
+  game:reset()
 end
 
 function love.update(dt)
-  player:update(dt)
+  game.player:update(dt)
   
-  for i, enemy in ipairs(enemies) do 
-    enemy:update(player)
+  for i, enemy in ipairs(game.enemies) do 
+    enemy:update(game.player)
 
     -- Test enemy -> player collision
-    if Collision.create(player, enemy):collide() then
-      game_state = 'game_over'
+    if Collision.create(game.player, enemy):collide() then
+      game.state = 'game_over'
     end
 
     -- Test enemy -> enemy collision
-    for j, other_enemy in ipairs(enemies) do
+    for j, other_enemy in ipairs(game.enemies) do
       if enemy ~= other_enemy then
         Collision.create(enemy, other_enemy):collide()
       end
     end
   end
 
-  removeDeadEnemies()
+  game:removeDeadEnemies()
 
-  if #enemies == 0 and game_state ~= 'game_over' then
-    game_state = 'win' 
+  if #game.enemies == 0 and game.state ~= 'game_over' then
+    game.state = 'win' 
   end
 end
 
-function removeDeadEnemies()
-  enemies_to_remove = {}
-
-  for i, enemy in ipairs(enemies) do
-    if enemy.state == 'dead' then
-      enemies_to_remove[i] = enemy
-    end
-  end
-
-  for i, enemy in ipairs(enemies_to_remove) do
-    table.remove(enemies, i)
-  end
-end
 
