@@ -16,15 +16,21 @@ end)()
 
 local collision_count = 0
 
+local game_state = 'playing'
+
 function love.draw()
-  player:draw()
+  if game_state == 'playing' then
+    player:draw()
 
-  for i, enemy in ipairs(enemies) do
-    enemy:draw()
+    for i, enemy in ipairs(enemies) do
+      enemy:draw()
+    end
+
+    love.graphics.setColor(255, 255, 0)
+  else
+    love.graphics.setColor(255, 0, 0)
+    love.graphics.print("YOU GOT HIT. GAME OVER.", 100, 100)
   end
-
-  love.graphics.setColor(255, 255, 0)
-  love.graphics.print("Collision count: " .. collision_count, 10, 10)
 end
 
 function love.load()
@@ -39,11 +45,8 @@ function love.update(dt)
 
     -- Test enemy collision
     if Collision.create(player, enemy):collide() then
-      print("Player x: " .. tostring(player.x))
-      print("Player y: " .. tostring(player.y))
-      print("Enemy x: " .. tostring(enemy.x))
-      print("Enemy y: " .. tostring(enemy.y))
       collision_count = collision_count + 1
+      game_state = 'game_over'
     end
   end
 end
