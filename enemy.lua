@@ -7,12 +7,13 @@ function Enemy.create()
 
   setmetatable(enemy, Enemy)
 
-  enemy.movement_length = 2
+  enemy.movement_length = math.random(5)
   enemy.enemy_length = 25
   enemy.window_width = love.graphics.getWidth()
   enemy.window_height = love.graphics.getHeight()
   enemy.x = math.random(enemy.window_width)
   enemy.y = math.random(enemy.window_height)
+  enemy.collision_radius = 2
 
   return enemy
 end
@@ -32,7 +33,11 @@ end
   
 function Enemy:draw()
   -- Setting enemy color
-  love.graphics.setColor(255, 5, 85)
+  love.graphics.setColor(255, 5, math.random(200))
 
   love.graphics.rectangle("fill", self.x, self.y, self.enemy_length, self.enemy_length)
+end
+
+function Enemy:collision()
+  print("Enemy has collided with player!")
 end

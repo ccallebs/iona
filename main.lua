@@ -1,17 +1,20 @@
 require 'player'
 require 'enemy'
+require 'collision'
 
 local player = Player.create()
 
 local enemies = (function()
   enemies = {}
 
-  for i=1, 5, 1 do
+  for i=1, 2, 1 do
     enemies[i] = Enemy.create()
   end
 
   return enemies
 end)()
+
+local collision_count = 0
 
 function love.draw()
   player:draw()
@@ -19,6 +22,8 @@ function love.draw()
   for i, enemy in ipairs(enemies) do
     enemy:draw()
   end
+
+  love.graphics.print("Collision count: " .. collision_count, 10, 10)
 end
 
 function love.load()
@@ -29,6 +34,11 @@ function love.update(dt)
   
   for i, enemy in ipairs(enemies) do 
     enemy:update(player)
+
+    -- Test enemy collision
+    if Collision.create(player, enemy):collide() then
+      collision_count = collision_count + 1
+    end
   end
 end
 

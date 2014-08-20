@@ -13,6 +13,7 @@ function Player.create()
   player.player_length = 50
   player.window_width = love.graphics.getWidth()
   player.window_height = love.graphics.getHeight()
+  player.collision_radius = 2
 
   return player
 end
@@ -43,33 +44,37 @@ function Player:draw()
 end
 
 function Player:moveRight()
-  if self:withinBounds() then
+  if self:withinBounds('x') then
     self.x = self.x + self.movement_length
   end
 end
 
 function Player:moveLeft()
-  if self:withinBounds() then
+  if self:withinBounds('x') then
     self.x = self.x - self.movement_length
   end
 end
 
 function Player:moveUp()
-  if self:withinBounds() then
+  if self:withinBounds('y') then
     self.y = self.y - self.movement_length
   end
 end
 
 function Player:moveDown()
-  if self:withinBounds() then
+  if self:withinBounds('y') then
     self.y = self.y + self.movement_length
   end
 end
 
 function Player:withinBounds(type)
   if type == 'x' then
-    return (self.x >= 0 or layer.x < self.window_width)
+    return (self.x >= 0 or self.x < self.window_width)
   else
     return (self.y >= 0 or self.y < self.window_height)
   end
+end
+
+function Player:collision()
+  print("Player 1 has collided with an enemy!")
 end
