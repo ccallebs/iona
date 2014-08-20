@@ -14,11 +14,13 @@ local enemies = (function()
   return enemies
 end)()
 
-local collision_count = 0
-
 local game_state = 'playing'
 
 function love.draw()
+  -- Used for displaying status messages
+  local middle_x = love.graphics.getWidth() / 2
+  local middle_y = love.graphics.getHeight() / 2
+
   if game_state == 'playing' then
     player:draw()
 
@@ -27,9 +29,12 @@ function love.draw()
     end
 
     love.graphics.setColor(255, 255, 0)
+  elseif game_state == 'win' then
+    love.graphics.setColor(0, 255, 0)
+    love.graphics.printf("YOU WIN!", 0, middle_y, 800, 'center')
   else
     love.graphics.setColor(255, 0, 0)
-    love.graphics.print("YOU GOT HIT. GAME OVER.", 100, 100)
+    love.graphics.printf("YOU GOT HIT. GAME OVER.", 0, middle_y, 800, 'center')
   end
 end
 
@@ -43,11 +48,37 @@ function love.update(dt)
   for i, enemy in ipairs(enemies) do 
     enemy:update(player)
 
-    -- Test enemy collision
+    -- Test enemy -> player collision
     if Collision.create(player, enemy):collide() then
-      collision_count = collision_count + 1
       game_state = 'game_over'
     end
+
+    -- Test enemy -> enemy collision
+    for j, other_enemy in ipairs(enemies) do
+      if enemy ~= other_enemy then
+        Collision.create(enemy, other_enemy):collide()
+      end
+    end
+  end
+
+  removeDeadEnemies()
+
+  if #enemies == 0 then
+    game_state = 'win' 
+  end
+end
+
+function removeDeadEnemies()
+  enemies_to_remove = {}
+
+  for i, enemy in ipairs(enemies) do
+    if enemy.state == 'dead' then
+      enemies_to_remove[i] = enemy
+    end
+  end
+
+  for i, enemy in ipairs(enemies_to_remove) do
+    table.remove(enemies, i)
   end
 end
 

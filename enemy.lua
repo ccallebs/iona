@@ -7,13 +7,14 @@ function Enemy.create()
 
   setmetatable(enemy, Enemy)
 
-  enemy.movement_length = math.random(5)
+  enemy.movement_length = math.random(1)
   enemy.enemy_length = 25
   enemy.window_width = love.graphics.getWidth()
   enemy.window_height = love.graphics.getHeight()
   enemy.x = math.random(enemy.window_width)
   enemy.y = math.random(enemy.window_height)
   enemy.collision_radius = 8
+  enemy.state = 'alive'
 
   return enemy
 end
@@ -39,5 +40,5 @@ function Enemy:draw()
 end
 
 function Enemy:collision()
-  return nil 
+  self.state = 'dead'
 end
