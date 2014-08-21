@@ -1,7 +1,7 @@
-require 'game'
-require 'player'
-require 'enemy'
-require 'collision'
+require 'lib.game'
+require 'lib.player'
+require 'lib.enemy'
+require 'lib.collision'
 
 local game = Game.create()
 
@@ -41,14 +41,14 @@ end
 function love.update(dt)
   -- Handle new game
   if love.keyboard.isDown("return") and (game.state ~= 'playing') then
-    game:reset() 
+    game:reset()
   end
 
   game:removeDeadEnemies()
-  
+
   game.player:update(dt)
-  
-  for i, enemy in ipairs(game.enemies) do 
+
+  for i, enemy in ipairs(game.enemies) do
     enemy:update(game.player)
 
     -- Test enemy -> player collision
@@ -66,7 +66,7 @@ function love.update(dt)
   end
 
   if #game.enemies == 0 and game.state ~= 'game_over' then
-    game.state = 'win' 
+    game.state = 'win'
   end
 end
 

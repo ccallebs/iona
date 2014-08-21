@@ -1,4 +1,4 @@
-require 'actor'
+require 'lib.actor'
 
 Player = {}
 
