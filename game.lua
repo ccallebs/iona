@@ -35,11 +35,11 @@ function Game:removeDeadEnemies()
 
   for i, enemy in ipairs(self.enemies) do
     if enemy.state == 'dead' then
-      enemies_to_remove[i] = enemy
+      table.insert(enemies_to_remove, i)
     end
   end
 
   for i, enemy in ipairs(enemies_to_remove) do
-    table.remove(self.enemies, i)
+    table.remove(self.enemies, enemy)
   end
 end

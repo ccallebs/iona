@@ -14,16 +14,14 @@ function Collision.create(object1, object2)
 end
 
 function Collision:doesCollide()
-  x_low = self.object2.x
-  x_high = self.object2.x + self.object2.side_length
+  object1_center_x = self.object1.x + self.object1.half_width
+  object1_center_y = self.object1.y + self.object1.half_height
 
-  y_low = self.object2.y
-  y_high = self.object2.y + self.object2.side_length
+  object2_center_x = self.object2.x + self.object2.half_width
+  object2_center_y = self.object2.y + self.object2.half_height
 
-  collides_along_x = self.object1.x >= x_low and self.object1.x <= x_high
-  collides_along_y = self.object1.y >= y_low and self.object1.y <= y_high
-
-  return collides_along_x and collides_along_y
+  return (math.abs(object1_center_x - object2_center_x) * 2 < (self.object1.side_length + self.object2.side_length)) and 
+         (math.abs(object1_center_y - object2_center_y) * 2 < (self.object1.side_length + self.object2.side_length))
 end
 
 function Collision:collide()
