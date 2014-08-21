@@ -17,6 +17,7 @@ end
 function Game:reset()
   self.enemies = self:generateEnemies(8)
   self.player = Player.create()
+  self.state = 'playing'
 end
 
 function Game:generateEnemies(count)

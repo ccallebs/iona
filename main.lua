@@ -23,9 +23,11 @@ function love.draw()
 
     love.graphics.setColor(255, 255, 0)
   elseif game.state == 'win' then
+    love.graphics.printf("Press [Enter] to start a new game.", 0, 100, 800, 'center')
     love.graphics.setColor(0, 255, 0)
     love.graphics.printf("YOU WIN!", 0, middle_y, 800, 'center')
   else
+    love.graphics.printf("Press [Enter] to start a new game.", 0, 100, 800, 'center')
     love.graphics.setColor(255, 0, 0)
     love.graphics.printf("YOU GOT HIT. GAME OVER.", 0, middle_y, 800, 'center')
   end
@@ -37,6 +39,11 @@ function love.load()
 end
 
 function love.update(dt)
+  -- Handle new game
+  if love.keyboard.isDown("return") and (game.state ~= 'playing') then
+    game:reset() 
+  end
+
   game:removeDeadEnemies()
   
   game.player:update(dt)
