@@ -8,7 +8,7 @@ function Enemy.create()
   setmetatable(enemy, Enemy)
 
   enemy.movement_length = math.random(3)
-  enemy.enemy_length = 25
+  enemy.side_length = 25
   enemy.window_width = love.graphics.getWidth()
   enemy.window_height = love.graphics.getHeight()
   enemy.x = math.random(enemy.window_width)
@@ -36,7 +36,7 @@ function Enemy:draw()
   -- Setting enemy color
   love.graphics.setColor(255, 5, math.random(200))
 
-  love.graphics.rectangle("fill", self.x, self.y, self.enemy_length, self.enemy_length)
+  love.graphics.rectangle("fill", self.x, self.y, self.side_length, self.side_length)
 end
 
 function Enemy:collision()

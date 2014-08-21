@@ -14,7 +14,11 @@ function love.draw()
     game.player:draw()
 
     for i, enemy in ipairs(game.enemies) do
-      enemy:draw()
+      -- This conditional shouldn't be necessary. Logic is handled
+      -- in the removeDeadEnemies() method
+      if enemy.state ~= 'dead' then
+        enemy:draw()
+      end
     end
 
     love.graphics.setColor(255, 255, 0)
@@ -33,6 +37,8 @@ function love.load()
 end
 
 function love.update(dt)
+  game:removeDeadEnemies()
+  
   game.player:update(dt)
   
   for i, enemy in ipairs(game.enemies) do 
@@ -41,6 +47,7 @@ function love.update(dt)
     -- Test enemy -> player collision
     if Collision.create(game.player, enemy):collide() then
       game.state = 'game_over'
+      game.enemies = {}
     end
 
     -- Test enemy -> enemy collision
@@ -50,8 +57,6 @@ function love.update(dt)
       end
     end
   end
-
-  game:removeDeadEnemies()
 
   if #game.enemies == 0 and game.state ~= 'game_over' then
     game.state = 'win' 

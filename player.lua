@@ -10,7 +10,7 @@ function Player.create()
   player.x = 0
   player.y = 0
   player.movement_length = 6
-  player.player_length = 50
+  player.side_length = 50
   player.window_width = love.graphics.getWidth()
   player.window_height = love.graphics.getHeight()
   player.collision_radius = 8
@@ -40,7 +40,7 @@ function Player:draw()
   -- Setting player color
   love.graphics.setColor(5, 255, 85)
 
-  love.graphics.rectangle("fill", self.x, self.y, self.player_length, self.player_length)
+  love.graphics.rectangle("fill", self.x, self.y, self.side_length, self.side_length)
 end
 
 function Player:moveRight()
