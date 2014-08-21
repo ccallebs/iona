@@ -1,21 +1,18 @@
+require 'actor'
+
 Enemy = {}
 
 Enemy.__index = Enemy
 
 function Enemy.create()
-  local enemy = {}
+  local enemy = Actor.create()
 
   setmetatable(enemy, Enemy)
 
-  enemy.movement_length = math.random(3)
   enemy.side_length = 25
-  enemy.half_width = enemy.side_length/2
-  enemy.half_height = enemy.side_length/2
-  enemy.window_width = love.graphics.getWidth()
-  enemy.window_height = love.graphics.getHeight()
+  enemy.movement_length = math.random(3)
   enemy.x = math.random(enemy.window_width)
   enemy.y = math.random(enemy.window_height)
-  enemy.collision_radius = 8
   enemy.state = 'alive'
 
   return enemy
@@ -33,7 +30,7 @@ function Enemy:update(player)
   self.x = self.x + calculateTrajectory(player.x, self.x)
   self.y = self.y + calculateTrajectory(player.y, self.y)
 end
-  
+
 function Enemy:draw()
   -- Setting enemy color
   love.graphics.setColor(255, 5, math.random(200))
