@@ -11,6 +11,8 @@ function Player.create()
   player.y = 0
   player.movement_length = 6
   player.side_length = 50
+  player.half_width = player.side_length/2
+  player.half_height = player.side_length/2
   player.window_width = love.graphics.getWidth()
   player.window_height = love.graphics.getHeight()
   player.collision_radius = 8

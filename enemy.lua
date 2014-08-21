@@ -9,6 +9,8 @@ function Enemy.create()
 
   enemy.movement_length = math.random(3)
   enemy.side_length = 25
+  enemy.half_width = enemy.side_length/2
+  enemy.half_height = enemy.side_length/2
   enemy.window_width = love.graphics.getWidth()
   enemy.window_height = love.graphics.getHeight()
   enemy.x = math.random(enemy.window_width)
