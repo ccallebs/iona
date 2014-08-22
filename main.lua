@@ -1,8 +1,8 @@
-require 'game'
-require 'player'
-require 'enemy'
-require 'collision'
-require 'menu'
+require 'lib.game'
+require 'lib.player'
+require 'lib.enemy'
+require 'lib.collision'
+require 'lib.menu'
 
 local game = Game.create()
 local menu = Menu.create()
@@ -55,10 +55,10 @@ function love.update(dt)
   end
 
   game:removeDeadEnemies()
-  
+
   game.player:update(dt)
-  
-  for i, enemy in ipairs(game.enemies) do 
+
+  for i, enemy in ipairs(game.enemies) do
     enemy:update(game.player)
 
     -- Test enemy -> player collision
@@ -76,7 +76,7 @@ function love.update(dt)
   end
 
   if #game.enemies == 0 and game.state ~= 'game_over' then
-    game.state = 'win' 
+    game.state = 'win'
   end
 end
 
