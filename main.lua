@@ -2,8 +2,10 @@ require 'lib.game'
 require 'lib.player'
 require 'lib.enemy'
 require 'lib.collision'
+require 'lib.menu'
 
 local game = Game.create()
+local menu = Menu.create()
 
 function love.draw()
   -- Used for displaying status messages
@@ -22,6 +24,8 @@ function love.draw()
     end
 
     love.graphics.setColor(255, 255, 0)
+  elseif game.state == 'menu' then
+    menu:draw()
   elseif game.state == 'win' then
     love.graphics.printf("Press [Enter] to start a new game.", 0, 100, 800, 'center')
     love.graphics.setColor(0, 255, 0)
@@ -35,13 +39,19 @@ end
 
 function love.load()
   love.graphics.setNewFont(28)
-  game:reset()
+  game.state = 'menu'
 end
 
 function love.update(dt)
+  if game.state == 'menu' then
+    menu.game = game
+    menu:update()
+    return
+  end
+
   -- Handle new game
-  if love.keyboard.isDown("return") and (game.state ~= 'playing') then
-    game:reset()
+  if love.keyboard.isDown("return") and (game.state ~= 'playing' and game.state ~= 'menu') then
+    game:reset() 
   end
 
   game:removeDeadEnemies()

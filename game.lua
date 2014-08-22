@@ -7,7 +7,7 @@ function Game.create()
 
   setmetatable(game, Game)
 
-  game.state = 'menu'
+  game.state = 'playing'
   game.enemies = {}
   game.player = nil
 
