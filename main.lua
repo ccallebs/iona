@@ -69,11 +69,7 @@ function love.update(dt)
 
     -- Test enemy -> enemy collision
     for j, other_enemy in ipairs(game.enemies) do
-<<<<<<< HEAD
-      if j ~= i then
-=======
       if i ~= j then
->>>>>>> upstream/master
         Collision.create(enemy, other_enemy):collide()
       end
     end
