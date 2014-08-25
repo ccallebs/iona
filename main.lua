@@ -58,6 +58,8 @@ function love.update(dt)
 
   game:removeDeadEnemies()
 
+  game:tryToSpawnEnemies(dt)
+
   game.player:update(dt)
 
   for i, enemy in ipairs(game.enemies) do

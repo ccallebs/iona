@@ -13,6 +13,8 @@ function Spawner.create()
   spawner.y = 400
   spawner.movement_length = 0
   spawner.side_length = 50
+
+  spawner.time_counter = 0
   
   return spawner
 end
@@ -20,4 +22,22 @@ end
 function Spawner:draw()
   love.graphics.setColor(70, 0, 255)
   love.graphics.rectangle("fill", self.x, self.y, self.side_length, self.side_length)
+end
+
+function Spawner:readyToSpawn(time)
+  self.time_counter = self.time_counter + time
+
+  if self.time_counter > 2 then
+    self.time_counter = 0
+    return true
+  else
+    return false
+  end
+end
+
+function Spawner:spawn(enemies)
+  enemy = Enemy.create()
+  enemy.x = self.x + self.side_length / 2
+  enemy.y = self.y + self.side_length / 2
+  table.insert(enemies, enemy)
 end
