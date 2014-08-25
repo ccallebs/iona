@@ -10,6 +10,7 @@ function Game.create()
   game.state = 'menu'
   game.enemies = {}
   game.player = nil
+  game.spawner = {}
 
   return game
 end
@@ -17,6 +18,7 @@ end
 function Game:reset()
   self.enemies = self:generateEnemies(8)
   self.player = Player.create()
+  self.spawner = Spawner.create()
   self.state = 'playing'
 end
 
