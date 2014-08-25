@@ -18,11 +18,7 @@ function love.draw()
     game.spawner:draw()
 
     for i, enemy in ipairs(game.enemies) do
-      -- This conditional shouldn't be necessary. Logic is handled
-      -- in the removeDeadEnemies() method
-      if enemy.state ~= 'dead' then
-        enemy:draw()
-      end
+      enemy:draw()
     end
 
     love.graphics.setColor(255, 255, 0)
