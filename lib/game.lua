@@ -10,7 +10,8 @@ function Game.create()
   game.state = 'menu'
   game.enemies = {}
   game.player = nil
-  game.spawner = {}
+  game.spawner = nil
+  game.timer = nil
 
   return game
 end
@@ -19,6 +20,7 @@ function Game:reset()
   self.enemies = { Enemy.create() } 
   self.player = Player.create()
   self.spawner = Spawner.create()
+  self.timer = Timer.create()
   self.state = 'playing'
 end
 
