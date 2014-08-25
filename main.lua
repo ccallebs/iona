@@ -64,7 +64,7 @@ function love.update(dt)
 
   for i, enemy in ipairs(game.enemies) do
     enemy:update(game.player)
-
+    
     -- Test enemy -> player collision
     if Collision.create(game.player, enemy):collide() then
       game.state = 'game_over'
@@ -73,7 +73,7 @@ function love.update(dt)
 
     -- Test enemy -> enemy collision
     for j, other_enemy in ipairs(game.enemies) do
-      if enemy ~= other_enemy then
+      if j ~= i then
         Collision.create(enemy, other_enemy):collide()
       end
     end
