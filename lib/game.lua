@@ -23,17 +23,15 @@ function Game:reset()
 end
 
 function Game:removeDeadEnemies()
-  enemies_to_remove = {}
+  new_enemies = {}
 
   for i, enemy in ipairs(self.enemies) do
-    if enemy.state == 'dead' then
-      table.insert(enemies_to_remove, i)
+    if enemy.state ~= 'dead' then
+      table.insert(new_enemies, enemy)
     end
   end
 
-  for i, enemy in ipairs(enemies_to_remove) do
-    table.remove(self.enemies, enemy)
-  end
+  self.enemies = new_enemies
 end
 
 function Game:tryToSpawnEnemies(time)

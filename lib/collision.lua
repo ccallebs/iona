@@ -20,8 +20,8 @@ function Collision:doesCollide()
   object2_center_x = self.object2.x + self.object2.half_width
   object2_center_y = self.object2.y + self.object2.half_height
 
-  return (math.abs(object1_center_x - object2_center_x) * 2 < (self.object1.side_length + self.object2.side_length)) and 
-         (math.abs(object1_center_y - object2_center_y) * 2 < (self.object1.side_length + self.object2.side_length))
+  return (math.abs(object1_center_x - object2_center_x) < (self.object1.half_width + self.object2.half_width)) and 
+         (math.abs(object1_center_y - object2_center_y) < (self.object1.half_height + self.object2.half_height))
 end
 
 function Collision:collide()
