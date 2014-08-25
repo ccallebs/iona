@@ -53,7 +53,7 @@ function love.update(dt)
 
   -- Handle new game
   if love.keyboard.isDown("return") and (game.state ~= 'playing' and game.state ~= 'menu') then
-    game:reset() 
+    game:reset()
   end
 
   game:removeDeadEnemies()
@@ -73,7 +73,7 @@ function love.update(dt)
 
     -- Test enemy -> enemy collision
     for j, other_enemy in ipairs(game.enemies) do
-      if enemy ~= other_enemy then
+      if i ~= j then
         Collision.create(enemy, other_enemy):collide()
       end
     end
