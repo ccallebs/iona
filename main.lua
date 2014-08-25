@@ -18,11 +18,7 @@ function love.draw()
     game.spawner:draw()
 
     for i, enemy in ipairs(game.enemies) do
-      -- This conditional shouldn't be necessary. Logic is handled
-      -- in the removeDeadEnemies() method
-      if enemy.state ~= 'dead' then
-        enemy:draw()
-      end
+      enemy:draw()
     end
 
     love.graphics.setColor(255, 255, 0)
@@ -53,7 +49,7 @@ function love.update(dt)
 
   -- Handle new game
   if love.keyboard.isDown("return") and (game.state ~= 'playing' and game.state ~= 'menu') then
-    game:reset() 
+    game:reset()
   end
 
   game:removeDeadEnemies()
@@ -73,7 +69,11 @@ function love.update(dt)
 
     -- Test enemy -> enemy collision
     for j, other_enemy in ipairs(game.enemies) do
+<<<<<<< HEAD
       if j ~= i then
+=======
+      if i ~= j then
+>>>>>>> upstream/master
         Collision.create(enemy, other_enemy):collide()
       end
     end
