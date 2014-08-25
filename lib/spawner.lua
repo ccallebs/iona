@@ -21,7 +21,7 @@ end
 
 function Spawner:draw()
   love.graphics.setColor(70, 0, 255)
-  love.graphics.rectangle("fill", self.x, self.y, self.side_length, self.side_length)
+  love.graphics.rectangle("line", self.x, self.y, self.side_length, self.side_length)
 end
 
 function Spawner:readyToSpawn(time)
