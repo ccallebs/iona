@@ -1,6 +1,7 @@
 require 'lib.game'
 require 'lib.player'
 require 'lib.enemy'
+require 'lib.spawner'
 require 'lib.collision'
 require 'lib.menu'
 
@@ -14,6 +15,7 @@ function love.draw()
 
   if game.state == 'playing' then
     game.player:draw()
+    game.spawner:draw()
 
     for i, enemy in ipairs(game.enemies) do
       -- This conditional shouldn't be necessary. Logic is handled
@@ -55,6 +57,8 @@ function love.update(dt)
   end
 
   game:removeDeadEnemies()
+
+  game:tryToSpawnEnemies(dt)
 
   game.player:update(dt)
 

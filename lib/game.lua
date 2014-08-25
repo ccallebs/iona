@@ -10,24 +10,16 @@ function Game.create()
   game.state = 'menu'
   game.enemies = {}
   game.player = nil
+  game.spawner = {}
 
   return game
 end
 
 function Game:reset()
-  self.enemies = self:generateEnemies(8)
+  self.enemies = { Enemy.create() } 
   self.player = Player.create()
+  self.spawner = Spawner.create()
   self.state = 'playing'
-end
-
-function Game:generateEnemies(count)
-  self.enemies = {}
-
-  for i=0, count, 1 do
-    self.enemies[i] = Enemy.create()
-  end
-
-  return self.enemies
 end
 
 function Game:removeDeadEnemies()
@@ -43,3 +35,14 @@ function Game:removeDeadEnemies()
     table.remove(self.enemies, enemy)
   end
 end
+
+function Game:tryToSpawnEnemies(time)
+  if self.state ~= 'playing' then
+    return
+  end
+
+  if self.spawner:readyToSpawn(time) then
+    self.spawner:spawn(self.enemies)
+  end
+end
+
