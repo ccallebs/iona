@@ -9,7 +9,9 @@ function Enemy.create()
 
   setmetatable(enemy, Enemy)
 
-  enemy.side_length = 25
+  enemy.side_length = 26
+  enemy.half_width = enemy.side_length/2
+  enemy.half_height = enemy.side_length/2
   enemy.movement_length = math.random(3)
   enemy.x = math.random(enemy.window_width)
   enemy.y = math.random(enemy.window_height)
