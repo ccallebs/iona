@@ -2,6 +2,7 @@ require 'lib.game'
 require 'lib.player'
 require 'lib.enemy'
 require 'lib.spawner'
+require 'lib.timer'
 require 'lib.collision'
 require 'lib.menu'
 
@@ -16,6 +17,7 @@ function love.draw()
   if game.state == 'playing' then
     game.player:draw()
     game.spawner:draw()
+    game.timer:draw()
 
     for i, enemy in ipairs(game.enemies) do
       enemy:draw()
