@@ -12,11 +12,11 @@ function Spawner.create()
   spawner.movement_length = 1
   spawner.side_length = 50
   spawner.velocity = { 
-    ["x"] = 1,
+    ["x"] = 0,
     ["y"] = 0 
   }
 
-  spawner.x = 0 + spawner.side_length
+  spawner.x = 0
   spawner.y = 0
 
   spawner.time_counter = 0
@@ -38,18 +38,18 @@ end
 
 function Spawner:updateVelocity(dt)
   if self:atFarRight() and self:atTop() then
-    self.velocity = { ["x"] = 0, ["y"] = -1 }
+    self.velocity = { ["x"] = 0, ["y"] = 2 }
   elseif self:atFarRight() and self:atBottom() then 
-    self.velocity = { ["x"] = -1, ["y"] = 0 }
+    self.velocity = { ["x"] = -2, ["y"] = 0 }
   elseif self:atFarLeft() and self:atTop() then
-    self.velocity = { ["x"] = 1, ["y"] = 0 }
+    self.velocity = { ["x"] = 2, ["y"] = 0 }
   elseif self:atFarLeft() and self:atBottom() then
-    self.velocity = { ["x"] = 0, ["y"] = 1 }
+    self.velocity = { ["x"] = 0, ["y"] = -2 }
   end
 end
 
 function Spawner:atFarRight()
-  return self.x >= (800 - self.side_length)
+  return self.x >= (self.window_width - self.side_length)
 end
 
 function Spawner:atFarLeft()
@@ -61,7 +61,7 @@ function Spawner:atTop()
 end
 
 function Spawner:atBottom()
-  return self.y >= (800 - self.side_length)
+  return self.y >= (self.window_height - self.side_length)
 end
 
 function Spawner:readyToSpawn(time)
