@@ -32,8 +32,8 @@ end
 function Spawner:update(dt)
   self:updateVelocity(dt)  
 
-  self.x = self.x + self.velocity["x"] * self.movement_length
-  self.y = self.y + self.velocity["y"] * self.movement_length
+  self.x = self.x + self.velocity.x * self.movement_length
+  self.y = self.y + self.velocity.y * self.movement_length
 end
 
 function Spawner:updateVelocity(dt)
