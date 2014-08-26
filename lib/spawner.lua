@@ -9,10 +9,15 @@ function Spawner.create()
 
   setmetatable(spawner, Spawner)
 
-  spawner.x = 400
-  spawner.y = 400
-  spawner.movement_length = 0
+  spawner.movement_length = 1
   spawner.side_length = 50
+  spawner.velocity = { 
+    ["x"] = 1,
+    ["y"] = 0 
+  }
+
+  spawner.x = 0 + spawner.side_length
+  spawner.y = 0
 
   spawner.time_counter = 0
   
@@ -22,6 +27,41 @@ end
 function Spawner:draw()
   love.graphics.setColor(70, 0, 255)
   love.graphics.rectangle("line", self.x, self.y, self.side_length, self.side_length)
+end
+
+function Spawner:update(dt)
+  self:updateVelocity(dt)  
+
+  self.x = self.x + self.velocity["x"] * self.movement_length
+  self.y = self.y + self.velocity["y"] * self.movement_length
+end
+
+function Spawner:updateVelocity(dt)
+  if self:atFarRight() and self:atTop() then
+    self.velocity = { ["x"] = 0, ["y"] = -1 }
+  elseif self:atFarRight() and self:atBottom() then 
+    self.velocity = { ["x"] = -1, ["y"] = 0 }
+  elseif self:atFarLeft() and self:atTop() then
+    self.velocity = { ["x"] = 1, ["y"] = 0 }
+  elseif self:atFarLeft() and self:atBottom() then
+    self.velocity = { ["x"] = 0, ["y"] = 1 }
+  end
+end
+
+function Spawner:atFarRight()
+  return self.x >= (800 - self.side_length)
+end
+
+function Spawner:atFarLeft()
+  return self.x <= 0
+end
+
+function Spawner:atTop()
+  return self.y <= 0
+end
+
+function Spawner:atBottom()
+  return self.y >= (800 - self.side_length)
 end
 
 function Spawner:readyToSpawn(time)
@@ -41,3 +81,4 @@ function Spawner:spawn(enemies)
   enemy.y = self.y + self.side_length / 2
   table.insert(enemies, enemy)
 end
+
