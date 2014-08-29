@@ -5,6 +5,7 @@ require 'lib.spawner'
 require 'lib.timer'
 require 'lib.collision'
 require 'lib.menu'
+require 'lib.particles'
 
 local game = Game.create()
 local menu = Menu.create()
@@ -13,6 +14,8 @@ function love.draw()
   -- Used for displaying status messages
   local middle_x = love.graphics.getWidth() / 2
   local middle_y = love.graphics.getHeight() / 2
+
+  Particles.getInstance():draw()
 
   if game.state == 'playing' then
     game.player:draw()
@@ -40,9 +43,12 @@ end
 function love.load()
   love.graphics.setNewFont(28)
   game.state = 'menu'
+  Particles:getInstance()
 end
 
 function love.update(dt)
+  Particles.getInstance():update(dt)
+
   if game.state == 'menu' then
     menu.game = game
     menu:update()

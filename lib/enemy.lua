@@ -1,4 +1,5 @@
 require 'lib.actor'
+require 'lib.particles'
 
 Enemy = {}
 
@@ -16,6 +17,7 @@ function Enemy.create()
   enemy.x = math.random(enemy.window_width)
   enemy.y = math.random(enemy.window_height)
   enemy.state = 'alive'
+  enemy.color = {r = 255, g = 5, b = math.random(200)}
 
   return enemy
 end
@@ -35,11 +37,12 @@ end
 
 function Enemy:draw()
   -- Setting enemy color
-  love.graphics.setColor(255, 5, math.random(200))
+  love.graphics.setColor(self.color.r, self.color.g, self.color.b)
 
   love.graphics.rectangle("fill", self.x, self.y, self.side_length, self.side_length)
 end
 
 function Enemy:collision()
   self.state = 'dead'
+  Particles.getInstance():emit(self.x + self.half_width, self.y + self.half_height, self.color.r, self.color.g, self.color.b)
 end
