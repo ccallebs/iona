@@ -47,37 +47,42 @@ function Player:draw()
 end
 
 function Player:moveRight()
-  if self:withinBounds('x') then
+  if self:withinBounds('right') then
     self.x = self.x + self.movement_length
   end
 end
 
 function Player:moveLeft()
-  if self:withinBounds('x') then
+  if self:withinBounds('left') then
     self.x = self.x - self.movement_length
   end
 end
 
 function Player:moveUp()
-  if self:withinBounds('y') then
+  if self:withinBounds('up') then
     self.y = self.y - self.movement_length
   end
 end
 
 function Player:moveDown()
-  if self:withinBounds('y') then
+  if self:withinBounds('down') then
     self.y = self.y + self.movement_length
-  end
-end
-
-function Player:withinBounds(type)
-  if type == 'x' then
-    return (self.x >= 0 or self.x < self.window_width)
-  else
-    return (self.y >= 0 or self.y < self.window_height)
   end
 end
 
 function Player:collision()
   Particles.getInstance():emit(self.x + self.half_width, self.y + self.half_height, self.color.r, self.color.g, self.color.b)
 end
+
+function Player:withinBounds(direction)
+  if direction == 'left' then
+    return (self.x >= 0)
+  elseif direction == 'right' then
+    return (self.x <= self.window_width - self.side_length)
+  elseif direction == 'down' then
+    return (self.y <= self.window_height - self.side_length)
+  elseif direction == 'up' then
+    return (self.y >= 0)
+  end
+end
+

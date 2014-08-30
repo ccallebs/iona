@@ -22,3 +22,4 @@ function Actor.create(object1, object2)
 
   return actor
 end
+
