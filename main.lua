@@ -70,7 +70,7 @@ function love.update(dt)
 
 
   for i, enemy in ipairs(game.enemies) do
-    enemy:update(game.player)
+    enemy:update(game.player, dt)
 
     -- Test enemy -> player collision
     if Collision.create(game.player, enemy):collide() then

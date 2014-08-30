@@ -1,5 +1,6 @@
 require 'lib.actor'
 require 'lib.particles'
+require 'lib.physics'
 
 Enemy = {}
 
@@ -13,7 +14,13 @@ function Enemy.create()
   enemy.side_length = 26
   enemy.half_width = enemy.side_length/2
   enemy.half_height = enemy.side_length/2
-  enemy.movement_length = math.random(3)
+
+  enemy.power = 1
+  enemy.mass = 1
+  enemy.x_velocity = 0
+  enemy.y_velocity = 0
+  enemy.speed_cap = 500
+
   enemy.x = math.random(enemy.window_width)
   enemy.y = math.random(enemy.window_height)
   enemy.state = 'alive'
@@ -22,17 +29,16 @@ function Enemy.create()
   return enemy
 end
 
-function Enemy:update(player)
-  calculateTrajectory = (function(player, enemy)
-    if player > enemy then
-      return self.movement_length
-    else
-      return -self.movement_length
-    end
-  end)
+function Enemy:update(player, dt)
 
-  self.x = self.x + calculateTrajectory(player.x, self.x)
-  self.y = self.y + calculateTrajectory(player.y, self.y)
+  local x_direction = (player.x - self.x)/2
+  local y_direction = (player.y - self.y)/2
+
+  local position = Physics.getPosition(self, x_direction, y_direction, dt, 0, 0)
+  self.x = position.x
+  self.y = position.y
+  self.x_velocity = position.x_velocity
+  self.y_velocity = position.y_velocity
 end
 
 function Enemy:draw()
@@ -46,3 +52,4 @@ function Enemy:collision()
   self.state = 'dead'
   Particles.getInstance():emit(self.x + self.half_width, self.y + self.half_height, self.color.r, self.color.g, self.color.b)
 end
+

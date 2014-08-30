@@ -77,8 +77,8 @@ end
 
 function Spawner:spawn(enemies)
   enemy = Enemy.create()
-  enemy.x = self.x + self.side_length / 2
-  enemy.y = self.y + self.side_length / 2
+  enemy.x = self.x + self.side_length / 4
+  enemy.y = self.y + self.side_length / 4
   table.insert(enemies, enemy)
 end
 
