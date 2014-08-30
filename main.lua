@@ -41,7 +41,7 @@ function love.draw()
 end
 
 function love.load()
-  love.graphics.setNewFont(28)
+  love.graphics.setNewFont('assets/KiriFont.ttf', 32)
   game.state = 'menu'
   Particles:getInstance()
 end
