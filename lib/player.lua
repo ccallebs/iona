@@ -1,4 +1,5 @@
 require 'lib.actor'
+require 'lib.particles'
 
 Player = {}
 
@@ -15,6 +16,7 @@ function Player.create()
   player.side_length = 50
   player.half_width = player.side_length/2
   player.half_height = player.side_length/2
+  player.color = {r = 5, g = 255, b = 85}
 
   return player
 end
@@ -39,7 +41,7 @@ end
 
 function Player:draw()
   -- Setting player color
-  love.graphics.setColor(5, 255, 85)
+  love.graphics.setColor(self.color.r, self.color.g, self.color.b)
 
   love.graphics.rectangle("fill", self.x, self.y, self.side_length, self.side_length)
 end
@@ -77,5 +79,5 @@ function Player:withinBounds(type)
 end
 
 function Player:collision()
-  return nil
+  Particles.getInstance():emit(self.x + self.half_width, self.y + self.half_height, self.color.r, self.color.g, self.color.b)
 end
