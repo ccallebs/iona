@@ -31,6 +31,7 @@ end
 
 function Enemy:update(player, dt)
 
+  --Calculate enemies direction vector uses the enemies position and the players position. Divide by 2 to normalize.
   local x_direction = (player.x - self.x)/2
   local y_direction = (player.y - self.y)/2
 

@@ -30,6 +30,8 @@ end
 function Player:update(dt)
   local x_direction = 0
   local y_direction = 0
+
+  --Set the players direction vector. 
   if love.keyboard.isDown("right") then
     x_direction = 1
   end
@@ -46,6 +48,7 @@ function Player:update(dt)
     y_direction = 1
   end
 
+  --Player only has thrust when the user is trying to move
   if love.keyboard.isDown("right") or love.keyboard.isDown("left") or love.keyboard.isDown("up") or love.keyboard.isDown("down") then
     self.power = 1000
   else
