@@ -12,6 +12,7 @@ function Menu.create()
 	menu.options = {'Play', 'Close'}
 	menu.selected = 1
 	menu.open = true
+	menu.logo = love.graphics.newImage("assets/logo.png")
 
 	return menu
 end
@@ -40,13 +41,17 @@ end
 
 function Menu:draw()
 	love.graphics.setColor(255, 0, 0)
-	love.graphics.printf("Main Menu", 0, 100, 800, 'center')
+	love.graphics.draw(self.logo, 100, 100)
+
 	start_y = 200
+
 	for i, option in ipairs(self.options) do
-		love.graphics.setColor(0, 0, 255)
+		love.graphics.setColor(229, 255, 36)
+
 		if i == self.selected then
-			love.graphics.setColor(0, 255, 0)
+			love.graphics.printf("> ", -50, start_y, 800, 'center')
 		end
+
 		love.graphics.printf(option, 0, start_y, 800, 'center')
 		start_y = start_y + 50
 	end

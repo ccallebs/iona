@@ -10,7 +10,7 @@ function Particles.getInstance()
 
     setmetatable(particles, Particles)
 
-    particles.particleImage = love.graphics.newImage('particle.png')
+    particles.particleImage = love.graphics.newImage('assets/particle.png')
     
     particles.systems = {}
 
