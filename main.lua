@@ -20,7 +20,7 @@ function love.draw()
   if game.state == 'playing' then
     game.player:draw()
     game.spawner:draw()
-    game.timer:draw()
+    --game.timer:draw() -- temporarily disabled
 
     for i, enemy in ipairs(game.enemies) do
       enemy:draw()
@@ -41,7 +41,7 @@ function love.draw()
 end
 
 function love.load()
-  love.graphics.setNewFont(28)
+  love.graphics.setNewFont('assets/KiriFont.ttf', 32)
   game.state = 'menu'
   Particles:getInstance()
 end

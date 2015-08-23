@@ -1,6 +1,3 @@
-
-require 'lib.actor'
-
 Timer = {}
 
 Timer.__index = Timer
@@ -22,7 +19,8 @@ function Timer:reset()
 end
 
 function Timer:draw()
-  love.graphics.printf(self:formatString(self:getElapsed()), 0, 0, 800, 'center')  
+  timer_text = self:getElapsed()
+  love.graphics.printf(self:formatString(timer_text), 0, 0, 200, 'center')  
 end
 
 function Timer:getElapsed()
